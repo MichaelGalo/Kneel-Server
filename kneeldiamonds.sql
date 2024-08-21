@@ -2,14 +2,14 @@
 -- Delete all records from each table
 DELETE FROM `Orders`;
 DELETE FROM `Jewelry`;
-DELETE FROM `Metal`;
+DELETE FROM `Metals`;
 DELETE FROM `Style`;
 DELETE FROM `Sizes`;
 
 -- Drop each table
 DROP TABLE IF EXISTS `Orders`;
 DROP TABLE IF EXISTS `Jewelry`;
-DROP TABLE IF EXISTS `Metal`;
+DROP TABLE IF EXISTS `Metals`;
 DROP TABLE IF EXISTS `Style`;
 DROP TABLE IF EXISTS `Sizes`;
 
@@ -35,7 +35,7 @@ CREATE TABLE `Style`
     `price` NUMERIC(5,2) NOT NULL
 );
 
-CREATE TABLE `Metal`
+CREATE TABLE `Metals`
 (
     `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     `metal` NVARCHAR(160) NOT NULL,
@@ -69,11 +69,11 @@ INSERT INTO `Sizes` (`id`, `carets`, `price`) VALUES (4, 1.5, 1997);
 INSERT INTO `Sizes` (`id`, `carets`, `price`) VALUES (5, 2, 3638);
 
 -- Insert data into Metal table
-INSERT INTO `Metal` (`id`, `metal`, `price`) VALUES (1, 'Sterling Silver', 12.42);
-INSERT INTO `Metal` (`id`, `metal`, `price`) VALUES (2, '14K Gold', 736.4);
-INSERT INTO `Metal` (`id`, `metal`, `price`) VALUES (3, '24K Gold', 1258.9);
-INSERT INTO `Metal` (`id`, `metal`, `price`) VALUES (4, 'Platinum', 795.45);
-INSERT INTO `Metal` (`id`, `metal`, `price`) VALUES (5, 'Palladium', 1241);
+INSERT INTO `Metals` (`id`, `metal`, `price`) VALUES (1, 'Sterling Silver', 12.42);
+INSERT INTO `Metals` (`id`, `metal`, `price`) VALUES (2, '14K Gold', 736.4);
+INSERT INTO `Metals` (`id`, `metal`, `price`) VALUES (3, '24K Gold', 1258.9);
+INSERT INTO `Metals` (`id`, `metal`, `price`) VALUES (4, 'Platinum', 795.45);
+INSERT INTO `Metals` (`id`, `metal`, `price`) VALUES (5, 'Palladium', 1241);
 
 -- Insert data into Jewelry table
 INSERT INTO `Jewelry` (`id`, `type`, `price`) VALUES (1, 'Ring', 100);
