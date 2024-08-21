@@ -64,3 +64,30 @@ def get_order(order_id):
             serialized_order = json.dumps({"error": "Order not found"})
 
     return serialized_order
+
+
+def create_order(new_order):
+    # Open a connection to the database
+    with sqlite3.connect("./kneeldiamonds.sqlite3") as conn:
+        db_cursor = conn.cursor()
+
+        # Write the SQL query to insert a new order
+        db_cursor.execute(
+            """
+        INSERT INTO Orders
+            (jewelryId, metalId, sizeId, styleId)
+        VALUES
+            (?, ?, ?, ?)
+        """,
+            (
+                new_order["jewelryId"],
+                new_order["metalId"],
+                new_order["sizeId"],
+                new_order["styleId"],
+            ),
+        )
+
+        # Get the primary key of the newly created order
+        new_order_id = db_cursor.lastrowid
+
+    return new_order_id
