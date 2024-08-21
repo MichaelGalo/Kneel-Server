@@ -16,8 +16,24 @@ def list_all_orders():
             o.jewelryId,
             o.metalId,
             o.sizeId,
-            o.styleId
+            o.styleId,
+            s.id AS size_id,
+            s.carets,
+            s.price AS size_price,
+            st.id AS style_id,
+            st.style,
+            st.price AS style_price,
+            m.id AS metal_id,
+            m.metal,
+            m.price AS metal_price,
+            j.id AS jewelry_id,
+            j.type,
+            j.price AS jewelry_price
         FROM Orders o
+        JOIN Sizes s ON s.id = o.sizeId
+        JOIN Style st ON st.id = o.styleId
+        JOIN Metals m ON m.id = o.metalId
+        JOIN Jewelry j ON j.id = o.jewelryId
         """
         )
         query_results = db_cursor.fetchall()
@@ -25,7 +41,36 @@ def list_all_orders():
         # Initialize an empty list and then add each dictionary to it
         orders = []
         for row in query_results:
-            orders.append(dict(row))
+
+            order = {
+                "id": row["id"],
+                "jewelry_id": row["jewelryId"],
+                "metal_id": row["metalId"],
+                "size_id": row["sizeId"],
+                "style_id": row["styleId"],
+                "size": {
+                    "id": row["size_id"],
+                    "carets": row["carets"],
+                    "price": row["size_price"],
+                },
+                "style": {
+                    "id": row["style_id"],
+                    "style": row["style"],
+                    "price": row["style_price"],
+                },
+                "metal": {
+                    "id": row["metal_id"],
+                    "metal": row["metal"],
+                    "price": row["metal_price"],
+                },
+                "jewelry": {
+                    "id": row["jewelry_id"],
+                    "type": row["type"],
+                    "price": row["jewelry_price"],
+                },
+            }
+
+            orders.append(order)
 
         # Serialize Python list to JSON encoded string
         serialized_orders = json.dumps(orders)
