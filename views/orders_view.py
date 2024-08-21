@@ -91,3 +91,22 @@ def create_order(new_order):
         new_order_id = db_cursor.lastrowid
 
     return new_order_id
+
+
+def delete_order(id):
+    # Open a connection to the database
+    with sqlite3.connect("./kneeldiamonds.sqlite3") as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        # Write the SQL query to delete the order
+        db_cursor.execute(
+            """
+        DELETE FROM Orders
+        WHERE id = ?
+        """,
+            (id,),
+        )
+        number_of_rows_affected = db_cursor.rowcount
+
+    return True if number_of_rows_affected > 0 else False

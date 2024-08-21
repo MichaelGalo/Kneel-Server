@@ -3,7 +3,7 @@ from http.server import HTTPServer
 from nss_handler import HandleRequests, status
 
 # non-boilerplate imports
-from views import list_all_orders, get_order, create_order
+from views import list_all_orders, get_order, create_order, delete_order
 
 
 class JSONServer(HandleRequests):
@@ -46,6 +46,26 @@ class JSONServer(HandleRequests):
                     "Your order could not be created.",
                     status.HTTP_500_SERVER_ERROR.value,
                 )
+
+    def do_DELETE(self):
+        """Handle DELETE requests"""
+
+        url = self.parse_url(self.path)
+        pk = url["pk"]
+
+        if url["requested_resource"] == "orders":
+            if pk != 0:
+                successfully_deleted = delete_order(pk)
+                if successfully_deleted:
+                    return self.response(
+                        "Your order has been deleted.",
+                        status.HTTP_204_SUCCESS_NO_RESPONSE_BODY.value,
+                    )
+                else:
+                    return self.response(
+                        "Your order could not be deleted.",
+                        status.HTTP_404_CLIENT_ERROR_RESOURCE_NOT_FOUND.value,
+                    )
 
 
 #
