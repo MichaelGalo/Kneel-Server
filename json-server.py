@@ -3,7 +3,7 @@ from http.server import HTTPServer
 from nss_handler import HandleRequests, status
 
 # non-boilerplate imports
-from views import list_all_orders
+from views import list_all_orders, get_order
 
 
 class JSONServer(HandleRequests):
@@ -19,8 +19,10 @@ class JSONServer(HandleRequests):
             if url["pk"] == 0:
                 response_body = list_all_orders()
                 return self.response(response_body, status.HTTP_200_SUCCESS.value)
-        else:
-            pass
+
+            elif url["pk"] != 0:
+                response_body = get_order(url["pk"])
+                return self.response(response_body, status.HTTP_200_SUCCESS.value)
 
 
 #

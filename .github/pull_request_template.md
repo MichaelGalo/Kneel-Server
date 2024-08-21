@@ -1,22 +1,27 @@
-* **I'm submitting a ...**
+# Description
 
-  - [ ] bug report
-  - [ ] feature request
+Please include a summary of the change and which issue is fixed. Please also include relevant motivation and context. List any dependencies that are required for this change.
 
-* **What is the current behavior?**
-
+Fixes # (issue)
 
 
-* **If the current behavior is a bug, please provide the steps to reproduce and if possible a minimal demo of the problem** 
+## Type of change
 
+Please delete options that are not relevant.
 
+- [ ] Bug fix
+- [ ] New feature
 
-* **What is the expected behavior?**
+# Checklist:
 
+- [ ] I have performed a self-review of my own code
+- [ ] I have commented my code, particularly in hard-to-understand areas
+- [ ] My changes generate no errors
 
+# How Should I Test This?
 
-* **What is the motivation / use case for changing the behavior?**
+Please describe the steps required to verify your changes. Provide instructions so your teammate can reproduce.
 
-
-
-* **Other information** (e.g. detailed explanation, stacktraces, related issues, suggestions how to fix, links for us to have context, eg. stackoverflow, gitter, etc)
+- [ ] Step 1
+- [ ] Step 2
+- [ ] Step 3
