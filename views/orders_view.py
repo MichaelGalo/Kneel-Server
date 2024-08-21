@@ -1,8 +1,6 @@
 import json
 import sqlite3
 
-# TODO: eventually change the itemId to jewelryId
-
 
 def list_all_orders():
     # Open a connection to the database
