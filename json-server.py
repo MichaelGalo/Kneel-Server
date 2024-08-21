@@ -3,7 +3,16 @@ from http.server import HTTPServer
 from nss_handler import HandleRequests, status
 
 # non-boilerplate imports
-from views import list_all_orders, get_order, create_order, delete_order
+from views import (
+    list_all_orders,
+    get_order,
+    create_order,
+    delete_order,
+    update_metal,
+    update_size,
+    update_style,
+    update_jewelry,
+)
 
 
 class JSONServer(HandleRequests):
@@ -66,6 +75,68 @@ class JSONServer(HandleRequests):
                         "Your order could not be deleted.",
                         status.HTTP_404_CLIENT_ERROR_RESOURCE_NOT_FOUND.value,
                     )
+
+    def do_PUT(self):
+        """Handle PUT requests"""
+
+        url = self.parse_url(self.path)
+
+        # Get the request body JSON for the new data
+        content_len = int(self.headers.get("content-length", 0))
+        request_body = self.rfile.read(content_len)
+        request_body = json.loads(request_body)
+
+        if url["requested_resource"] == "metals":
+            successfully_updated = update_metal(url["pk"], request_body)
+            if successfully_updated:
+                return self.response(
+                    "The metal has been updated.",
+                    status.HTTP_204_SUCCESS_NO_RESPONSE_BODY.value,
+                )
+            else:
+                return self.response(
+                    "The metal could not be updated.",
+                    status.HTTP_404_CLIENT_ERROR_RESOURCE_NOT_FOUND.value,
+                )
+
+        elif url["requested_resource"] == "sizes":
+            successfully_updated = update_size(url["pk"], request_body)
+            if successfully_updated:
+                return self.response(
+                    "The size has been updated.",
+                    status.HTTP_204_SUCCESS_NO_RESPONSE_BODY.value,
+                )
+            else:
+                return self.response(
+                    "The size could not be updated.",
+                    status.HTTP_404_CLIENT_ERROR_RESOURCE_NOT_FOUND.value,
+                )
+
+        elif url["requested_resource"] == "style":
+            successfully_updated = update_style(url["pk"], request_body)
+            if successfully_updated:
+                return self.response(
+                    "The style has been updated.",
+                    status.HTTP_204_SUCCESS_NO_RESPONSE_BODY.value,
+                )
+            else:
+                return self.response(
+                    "The style could not be updated.",
+                    status.HTTP_404_CLIENT_ERROR_RESOURCE_NOT_FOUND.value,
+                )
+
+        elif url["requested_resource"] == "jewelry":
+            successfully_updated = update_jewelry(url["pk"], request_body)
+            if successfully_updated:
+                return self.response(
+                    "The jewelry has been updated.",
+                    status.HTTP_204_SUCCESS_NO_RESPONSE_BODY.value,
+                )
+            else:
+                return self.response(
+                    "The jewelry could not be updated.",
+                    status.HTTP_404_CLIENT_ERROR_RESOURCE_NOT_FOUND.value,
+                )
 
 
 #
