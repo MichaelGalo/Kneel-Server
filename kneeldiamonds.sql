@@ -1,0 +1,40 @@
+CREATE TABLE `Jewlry`
+(
+    `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `jewelry` NVARCHAR(160) NOT NULL,
+    `price` NUMERIC(5,2) NOT NULL
+);
+
+CREATE TABLE `Sizes`
+(
+    `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `size` NVARCHAR(160) NOT NULL,
+    `price` NUMERIC(5,2) NOT NULL
+);
+
+CREATE TABLE `Style`
+(
+    `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `style` NVARCHAR(160) NOT NULL,
+    `price` NUMERIC(5,2) NOT NULL
+);
+
+CREATE TABLE `Metal`
+(
+    `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `metal` NVARCHAR(160) NOT NULL,
+    `price` NUMERIC(5,2) NOT NULL
+);
+
+CREATE TABLE `Orders`
+(
+    `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `jewlryId` INTEGER NOT NULL,
+    `metalId` INTEGER NOT NULL,
+    `sizeId` INTEGER NOT NULL,
+    `styleId` INTEGER NOT NULL,
+    FOREIGN KEY (`jewlryId`) REFERENCES `Jewlry`(`id`),
+    FOREIGN KEY (`metalId`) REFERENCES `Metal`(`id`),
+    FOREIGN KEY (`sizeId`) REFERENCES `Sizes`(`id`),
+    FOREIGN KEY (`styleId`) REFERENCES `Style`(`id`)
+);
